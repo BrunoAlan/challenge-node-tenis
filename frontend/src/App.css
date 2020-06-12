@@ -1,0 +1,113 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgb(20, 20, 20, 0.9);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  z-index: 100;
+}
+
+.navbar ul {
+  list-style: none;
+  text-align: right;
+}
+
+.navbar ul li {
+  color: white;
+  font-size: 1.2em;
+  padding-right: 60px;
+  display: inline;
+  text-transform: uppercase;
+}
+
+.navbar ul li:hover {
+  color: rgb(120, 125, 202);
+}
+
+.navbar .active {
+  color: rgb(120, 125, 202);
+  border-bottom: 1px solid rgb(120, 125, 202);
+  font-weight: bold;
+}
+
+.australian-section {
+  display: flex;
+  height: 100vh;
+  background-image: url('/australian.jpg');
+  background-position: center;
+  background-size: cover;
+  padding-left: 20px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.wimbledon-section {
+  display: flex;
+  height: 100vh;
+  background-image: url('/wimbledon.png');
+  background-position: center;
+  background-size: cover;
+  padding-left: 20px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.usopen-section {
+  display: flex;
+  height: 100vh;
+  background-image: url('/usopen.jpg');
+  background-position: center;
+  background-size: cover;
+  padding-left: 20px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.rolandgarros-section {
+  display: flex;
+  height: 100vh;
+  background-image: url('/rolandgarros.jpeg');
+  background-position: center;
+  justify-content: space-around;
+  padding-left: 20px;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  width: 50vw;
+  height: 50vh;
+  background-color: rgb(202, 202, 202, 0.8);
+  align-items: flex-start;
+  align-self: center;
+  padding-top: 2vh;
+  padding-bottom: 10vh;
+  border-radius: 5px;
+  justify-content: space-around;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.content img {
+  align-self: center;
+}
+
+.content-title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.player-detail {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 50vh;
+  background-color: rgb(202, 202, 202, 0.8);
+  align-items: center;
+  align-self: center;
+  padding-top: 2vh;
+  padding-bottom: 10vh;
+  border-radius: 5px;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
