@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+require('dotenv').config();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Log = require('./model/Log');
@@ -12,7 +13,7 @@ app.use(express.json());
 
 //db connection
 mongoose.connect(
-  'mongodb+srv://alan:1234asd@cluster0-8zhwt.mongodb.net/logs?retryWrites=true&w=majority',
+  process.env.MONGO_URI,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log('db connect'),
 );

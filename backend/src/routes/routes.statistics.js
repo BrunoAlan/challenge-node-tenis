@@ -1,18 +1,21 @@
 const { Router } = require('express');
+require('dotenv').config();
 const router = Router();
-const Log = require('../model/Log');
+const saveLog = require('../db');
 
 let resAustralia, resRolandGarros, resWimbledon, resUS;
 let usOpenWinners;
 
 //connect to google sheet
 const { google } = require('googleapis');
-const keys = require('../../json/credentials.json');
 const { cloudfunctions } = require('googleapis/build/src/apis/cloudfunctions');
-
-const client = new google.auth.JWT(keys.client_email, null, keys.private_key, [
-  'https://www.googleapis.com/auth/spreadsheets',
-]);
+//
+const client = new google.auth.JWT(
+  process.env.CLIENT_EMAIL,
+  null,
+  process.env.PRIVATE_KEY,
+  ['https://www.googleapis.com/auth/spreadsheets'],
+);
 
 client.authorize((err, tokens) => {
   if (err) {
@@ -26,7 +29,7 @@ client.authorize((err, tokens) => {
 async function googleSheetRun(cl) {
   const gs = google.sheets({ version: 'v4', auth: cl });
   const opt = {
-    spreadsheetId: '1j4MVmWvjw10RR2tkPEN_DOTl8LEnxkJZSk-_ftvlvEc',
+    spreadsheetId: process.env.SPREADSHEET_ID,
     range: 'A2:P4115',
   };
   data = await gs.spreadsheets.values.get(opt);
@@ -108,49 +111,21 @@ function joinData(player, wins, date) {
 //routes
 
 router.route('/wimbledon').get((req, res, next) => {
-  const log = new Log({
-    req: '/wimbledon',
-    type: 'Success',
-  });
-  log
-    .save()
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+  saveLog(req.url, 'Success');
   res.send(resWimbledon);
 });
 
 router.route('/rolandgarros').get((req, res, next) => {
-  const log = new Log({
-    req: '/rolandgarros',
-    type: 'Success',
-  });
-  log
-    .save()
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+  saveLog(req.url, 'Success');
   res.send(resRolandGarros);
 });
 
 router.route('/australian').get((req, res, next) => {
-  const log = new Log({
-    req: '/australian',
-    type: 'Success',
-  });
-  log
-    .save()
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+  saveLog(req.url, 'Success');
   res.send(resAustralia);
 });
 router.route('/usopen').get((req, res, next) => {
-  const log = new Log({
-    req: '/usopen',
-    type: 'Success',
-  });
-  log
-    .save()
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+  saveLog(req.url, 'Success');
   res.send(resUS);
 });
 
