@@ -1,7 +1,7 @@
 const { Router } = require('express');
 require('dotenv').config();
 const router = Router();
-const saveLog = require('../db');
+const { saveLog } = require('../db');
 
 let resAustralia, resRolandGarros, resWimbledon, resUS;
 let usOpenWinners;
@@ -20,8 +20,10 @@ const client = new google.auth.JWT(
 client.authorize((err, tokens) => {
   if (err) {
     console.log(err);
+    saveLog('Spread sheet API', 'Error');
     return;
   } else {
+    saveLog('Spread sheet API', 'Success');
     googleSheetRun(client);
   }
 });

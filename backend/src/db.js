@@ -1,14 +1,22 @@
 const Log = require('./model/Log');
 
-function saveLog(req, type) {
+async function saveLog(req, type) {
   const log = new Log({
     req: req,
     type: type,
   });
-  log
+  await log
     .save()
     .then()
     .catch((err) => console.log(err));
 }
 
-module.exports = saveLog;
+async function getLogs() {
+  const logs = await Log.find();
+  return logs;
+}
+
+module.exports = {
+  saveLog,
+  getLogs,
+};
