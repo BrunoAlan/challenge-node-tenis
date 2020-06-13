@@ -1,4 +1,9 @@
 #!/bin/bash
 
-node backend/src/index.js frontend/src/index.js
+cd backend/src
+node index.js&
+cd ..
+cd ..
+cd frontend
+yarn start
 
