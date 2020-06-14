@@ -7,6 +7,7 @@ function Wimbledon() {
   const [mostWinner, setmostWinner] = useState('');
   const [wins, setWins] = useState('');
   const [lastWin, setLastWin] = useState('');
+  const [allWinners, setAllWinners] = useState([]);
 
   useEffect(() => {
     axios
@@ -20,6 +21,18 @@ function Wimbledon() {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${API}/wimbledonWinners`)
+      .then((res) => {
+        setAllWinners((allWinners) => [...allWinners, res.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="wimbledon-section" id="wimbledon">
       <Tourney
@@ -30,6 +43,7 @@ function Wimbledon() {
         mostWinner={mostWinner}
         wins={wins}
         lastWin={lastWin}
+        allWinners={allWinners}
       />
     </div>
   );

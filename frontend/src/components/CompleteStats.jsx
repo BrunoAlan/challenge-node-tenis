@@ -1,24 +1,26 @@
 import React from 'react';
 import { useState } from 'react';
 
-function CompleteStats() {
-  //   const topTen = () => {
-  //     let top = [];
-  //     if (winners.length > 0) {
-  //       for (let player = 0; player < 10; player++) {
-  //         top.push(
-  //           <p>{`${winners[0][player][0]} : ${winners[0][player][1]} `}</p>,
-  //         );
-  //       }
-  //     }
+function CompleteStats({ allWinners, setShowAllStats }) {
+  const topTen = () => {
+    let top = [];
+    if (allWinners.length > 0) {
+      for (let player = 0; player < 10; player++) {
+        top.push(
+          <p>{`${allWinners[0][player][0]} : ${allWinners[0][player][1]} `}</p>,
+        );
+      }
+    }
+    console.log(allWinners);
 
-  //     return top;
-  //   };
+    return top;
+  };
 
   return (
     <div className="all-stats">
       <h1>MOST WINNERS</h1>
-      {/* <h3>{topTen()}</h3> */}
+      <h3>{topTen()}</h3>
+      <button onClick={() => setShowAllStats(false)}>BACK</button>
     </div>
   );
 }

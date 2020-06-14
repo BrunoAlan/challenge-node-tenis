@@ -4,7 +4,7 @@ const router = Router();
 const { saveLog } = require('../db');
 
 let resAustralia, resRolandGarros, resWimbledon, resUS;
-let usOpenWinners;
+let usOpenWinners, australianWinners, wimbledonWinners, rolandGarrosWinner;
 
 //connect to google sheet
 const { google } = require('googleapis');
@@ -49,18 +49,18 @@ async function googleSheetRun(cl) {
   usOpenWinners = groupWinners(usOpen);
   australianWinners = groupWinners(australianOpen);
   wimbledonWinners = groupWinners(wimbledon);
-  rolandGarrosWinner = groupWinners(rolandGarros);
+  rolandGarrosWinners = groupWinners(rolandGarros);
 
   //Last win of the most winner player of each grand slam
-  lastWin(rolandGarrosWinner[0][0], rolandGarros);
+  lastWin(rolandGarrosWinners[0][0], rolandGarros);
   lastWin(usOpenWinners[0][0], usOpen);
   lastWin(australianWinners[0][0], australianOpen);
   lastWin(wimbledonWinners[0][0], wimbledon);
 
   resRolandGarros = joinData(
-    rolandGarrosWinner[0][0],
-    rolandGarrosWinner[0][1],
-    lastWin(rolandGarrosWinner[0][0], rolandGarros),
+    rolandGarrosWinners[0][0],
+    rolandGarrosWinners[0][1],
+    lastWin(rolandGarrosWinners[0][0], rolandGarros),
   );
 
   resAustralia = joinData(
@@ -110,8 +110,9 @@ function joinData(player, wins, date) {
   return { player: player, wins: wins, lastWin: date };
 }
 
-//routes
+//ROUTES
 
+//TOP WINNER, DATE AND LAS WIN
 router.route('/wimbledon').get((req, res, next) => {
   saveLog(req.url, 'Success');
   res.send(resWimbledon);
@@ -129,6 +130,27 @@ router.route('/australian').get((req, res, next) => {
 router.route('/usopen').get((req, res, next) => {
   saveLog(req.url, 'Success');
   res.send(resUS);
+});
+
+//TOP WINNERS
+router.route('/usopenWinners').get((req, res, next) => {
+  saveLog(req.url, 'Success');
+  res.send(usOpenWinners);
+});
+
+router.route('/wimbledonWinners').get((req, res, next) => {
+  saveLog(req.url, 'Success');
+  res.send(wimbledonWinners);
+});
+
+router.route('/australianWinners').get((req, res, next) => {
+  saveLog(req.url, 'Success');
+  res.send(australianWinners);
+});
+
+router.route('/rgWinners').get((req, res, next) => {
+  saveLog(req.url, 'Success');
+  res.send(rolandGarrosWinners);
 });
 
 module.exports = router;

@@ -7,6 +7,7 @@ function UsOpen() {
   const [mostWinner, setmostWinner] = useState('');
   const [wins, setWins] = useState('');
   const [lastWin, setLastWin] = useState('');
+  const [allWinners, setAllWinners] = useState([]);
 
   useEffect(() => {
     axios
@@ -15,6 +16,17 @@ function UsOpen() {
         setmostWinner(res.data.player);
         setWins(res.data.wins);
         setLastWin(res.data.lastWin);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${API}/usopenWinners`)
+      .then((res) => {
+        setAllWinners((allWinners) => [...allWinners, res.data]);
       })
       .catch((err) => {
         console.log(err);
@@ -30,6 +42,7 @@ function UsOpen() {
         mostWinner={mostWinner}
         wins={wins}
         lastWin={lastWin}
+        allWinners={allWinners}
       />
     </div>
   );

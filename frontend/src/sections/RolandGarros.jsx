@@ -13,11 +13,10 @@ function RolandGarros() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/api/statistics/usopenwinners')
+      .get(`${API}/rgwinners`)
       .then((res) => {
         setAllWinners((allWinners) => [...allWinners, res.data]);
       })
-
       .catch((err) => {
         console.log(err);
       });
@@ -46,6 +45,7 @@ function RolandGarros() {
         mostWinner={mostWinner}
         wins={wins}
         lastWin={lastWin}
+        allWinners={allWinners}
       />
     </div>
   );
