@@ -15,7 +15,6 @@ function Tourney({
   wins,
   allWinners,
 }) {
-  const [showTourney, setShowTourney] = useState(true);
   const [showDetail, setShowDetail] = useState(false);
   const [showAllStats, setShowAllStats] = useState(false);
 
@@ -27,28 +26,25 @@ function Tourney({
     <Fragment>
       {!showAllStats ? (
         <Fragment>
-          <Fade left when={showTourney}>
-            <div className="content">
-              <div>
-                <div className="content-title">
-                  <h1>{slug}</h1>
-                </div>
-                <h2>LOCATION</h2>
-                <h3>{location}</h3>
-                <h2>SURFACE</h2>
-                <h3>{surface}</h3>
-                <h2> MOST WINNER</h2>
-                <h3 onClick={handleClick}>{mostWinner}</h3>
+          <div className="content">
+            <div>
+              <div className="content-title">
+                <h1>{slug}</h1>
               </div>
-              <img src={image} width="30%" alt="gm_logo" />
+              <h2>LOCATION</h2>
+              <h3>{location}</h3>
+              <h2>SURFACE</h2>
+              <h3>{surface}</h3>
+              <h2> MOST WINNER</h2>
+              <h3 onClick={handleClick}>{mostWinner}</h3>
             </div>
-          </Fade>
+            <img src={image} width="30%" alt="gm_logo" />
+          </div>
+
           <Fade right when={showDetail}>
             <PlayerStats
               wins={wins}
               lastWin={lastWin}
-              setShowTourney={setShowTourney}
-              setShowDetail={setShowDetail}
               setShowAllStats={setShowAllStats}
             />
           </Fade>

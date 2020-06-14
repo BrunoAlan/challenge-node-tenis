@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 
 function CompleteStats({ allWinners, setShowAllStats }) {
   const topTen = () => {
@@ -7,7 +6,9 @@ function CompleteStats({ allWinners, setShowAllStats }) {
     if (allWinners.length > 0) {
       for (let player = 0; player < 10; player++) {
         top.push(
-          <p>{`${allWinners[0][player][0]} : ${allWinners[0][player][1]} `}</p>,
+          <p
+            key={allWinners[0][player][0]}
+          >{`${allWinners[0][player][0]} : ${allWinners[0][player][1]} `}</p>,
         );
       }
     }
