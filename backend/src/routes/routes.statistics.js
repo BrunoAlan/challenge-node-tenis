@@ -37,13 +37,10 @@ async function googleSheetRun(cl) {
   data = await gs.spreadsheets.values.get(opt);
   allTourney = data.data.values;
 
-  let rolandGarros = filterTourneySlug(allTourney, 'Roland Garros');
-  let wimbledon = filterTourneySlug(allTourney, 'Wimbledon');
-  let usOpen = filterTourneySlug(allTourney, 'US Championships');
-  let australianOpen = filterTourneySlug(
-    allTourney,
-    'Australian Championships',
-  );
+  let rolandGarros = filterTourneySlug(allTourney, '520');
+  let wimbledon = filterTourneySlug(allTourney, '540');
+  let usOpen = filterTourneySlug(allTourney, '560');
+  let australianOpen = filterTourneySlug(allTourney, '580');
 
   //All winners of each grand slam ordered by wins
   usOpenWinners = groupWinners(usOpen);
@@ -83,8 +80,8 @@ async function googleSheetRun(cl) {
 }
 
 //FUNCTIONS
-function filterTourneySlug(allTourney, tourney_slug) {
-  return allTourney.filter((tourney) => tourney[2] == tourney_slug);
+function filterTourneySlug(allTourney, tourney_id) {
+  return allTourney.filter((tourney) => tourney[3] == tourney_id);
 }
 
 function groupWinners(tourney_slug) {
